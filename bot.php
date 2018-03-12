@@ -193,10 +193,10 @@ if(!is_null($events)){
                         $replyData = new AudioMessageBuilder($audioUrl,20000);
                         break;
                     case "l":
-                        $placeName = "ที่ตั้งร้าน";
-                        $placeAddress = "แขวง พลับพลา เขต วังทองหลาง กรุงเทพมหานคร ประเทศไทย";
-                        $latitude = 13.780401863217657;
-                        $longitude = 100.61141967773438;
+                        $placeName = "ที่ทำงาน";
+                        $placeAddress = "สำนักงานพัฒนาวิทยาศาสตร์และเทคโนโลยีแห่งชาติ";
+                        $latitude = 14.076790;
+                        $longitude = 100.601624;
                         $replyData = new LocationMessageBuilder($placeName, $placeAddress, $latitude ,$longitude);              
                         break;
                     case "m":
@@ -207,10 +207,10 @@ if(!is_null($events)){
                         $picThumbnail = 'https://www.mywebsite.com/imgsrc/photos/f/simpleflower/240';
                         $imageMessage = new ImageMessageBuilder($picFullSize,$picThumbnail);
                                          
-                        $placeName = "ที่ตั้งร้าน";
-                        $placeAddress = "แขวง พลับพลา เขต วังทองหลาง กรุงเทพมหานคร ประเทศไทย";
-                        $latitude = 13.780401863217657;
-                        $longitude = 100.61141967773438;
+                        $placeName = "ที่ทำงาน";
+                        $placeAddress = "สำนักงานพัฒนาวิทยาศาสตร์และเทคโนโลยีแห่งชาติ";
+                        $latitude = 14.076790;
+                        $longitude = 100.601624;
                         $locationMessage = new LocationMessageBuilder($placeName, $placeAddress, $latitude ,$longitude);        
      
                         $multiMessage =     new MultiMessageBuilder;
