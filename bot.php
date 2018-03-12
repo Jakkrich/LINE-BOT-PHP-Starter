@@ -1,25 +1,22 @@
 <?php
-define("LINE_MESSAGING_API_CHANNEL_TOKEN", "HcFHTh85/WUrDeR85X7MjkKHK1QLkyadxIYs0UCCZ+D7/DmdGd0f5HrWslIOeS/9ONeSJK5XmKzZPOIRwB7usy99mRvB8z8dj5X0OV6xBWFSYErp2zdZgejqTT5T/zcbZZj/EQ5wxfxKnz4WvM7UMwdB04t89/1O/w1cDnyilFU=");
+define("LINE_MESSAGING_API_CHANNEL_ACCESS_TOKEN", "HcFHTh85/WUrDeR85X7MjkKHK1QLkyadxIYs0UCCZ+D7/DmdGd0f5HrWslIOeS/9ONeSJK5XmKzZPOIRwB7usy99mRvB8z8dj5X0OV6xBWFSYErp2zdZgejqTT5T/zcbZZj/EQ5wxfxKnz4WvM7UMwdB04t89/1O/w1cDnyilFU=");
 define("LINE_MESSAGING_API_CHANNEL_SECRET", "2e54360ce915aeb46e95c54cf392d685");
 
-require __DIR__."/../vendor/autoload.php";
-/*
-$bot = new \LINE\LINEBot(
-    new \LINE\LINEBot\HTTPClient\CurlHTTPClient(LINE_MESSAGING_API_CHANNEL_TOKEN),
-    ['channelSecret' => LINE_MESSAGING_API_CHANNEL_SECRET]
-);
+include ('line-bot-api/php/line-bot.php');
 
-$signature = $_SERVER["HTTP_".\LINE\LINEBot\Constant\HTTPHeader::LINE_SIGNATURE];
-$body = file_get_contents("php://input");
+$bot = new BOT_API(LINE_MESSAGING_API_CHANNEL_SECRET, LINE_MESSAGING_API_CHANNEL_ACCESS_TOKEN);
+	
+if (!empty($bot->isEvents)) {
+		
+	$bot->replyMessageNew($bot->replyToken, json_encode($bot->message));
 
-$events = $bot->parseEventRequest($body, $signature);
+	if ($bot->isSuccess()) {
+		echo 'Succeeded!';
+		exit();
+	}
 
-foreach ($events as $event) {
-    if ($event instanceof \LINE\LINEBot\Event\MessageEvent\TextMessage) {
-        $reply_token = $event->getReplyToken();
-        $text = $event->getText();
-        $bot->replyText($reply_token, $text);
-    }
+	// Failed
+	echo $bot->response->getHTTPStatus . ' ' . $bot->response->getRawBody(); 
+	exit();
+
 }
-*/
-echo "OK";
