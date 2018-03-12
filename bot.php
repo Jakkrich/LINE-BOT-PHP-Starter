@@ -91,8 +91,8 @@ if(!is_null($events)){
                 case "l":
                     $placeName = "สวทช.";
                     $placeAddress = "สำนักงานพัฒนาวิทยาศาสตร์และเทคโนโลยีแห่งชาติ";
-                    $latitude = 14.0771597;
-                    $longitude = 100.6005289;
+                    $latitude = 14.077076;
+                    $longitude = 100.601741;
                     $replyData = new LocationMessageBuilder($placeName, $placeAddress, $latitude ,$longitude);              
                     break;
                 case "s":
