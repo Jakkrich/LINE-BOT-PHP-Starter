@@ -106,22 +106,33 @@ if(!is_null($events)){
                 $userMessage = strtolower($userMessage); // แปลงเป็นตัวเล็ก สำหรับทดสอบ
                 switch ($userMessage) {
 					case "friday":
-						$replyData = new TemplateMessageBuilder('Menu',
-                            new ConfirmTemplateBuilder(
-                                    'จะให้ทำอะไรละ ?',
-                                    array(
-                                        new MessageTemplateActionBuilder(
-                                            'สวัสดี',
-                                            'สวัสดี'
-                                        ),
-                                        new MessageTemplateActionBuilder(
-                                            'ส่งสติกเกอร์หน่อย',
-                                            'ส่งสติกเกอร์หน่อย'
-                                        )
-                                    )
+                        $actionBuilder = array(
+                            new MessageTemplateActionBuilder(
+                                'สวัสดี',// ข้อความแสดงในปุ่ม
+                                'สวัสดี' // ข้อความที่จะแสดงฝั่งผู้ใช้ เมื่อคลิกเลือก
+                            ),
+							new MessageTemplateActionBuilder(
+                                'ส่งสติกเกอร์หน่อย',
+								'ส่งสติกเกอร์หน่อย'
+                            ),
+                            new UriTemplateActionBuilder(
+                                'พาไปหน้า i', // ข้อความแสดงในปุ่ม
+                                'https://i.nstda.or.th'
+                            ),   
+                        );
+                        $replyData = new TemplateMessageBuilder('Carousel',
+                            new CarouselTemplateBuilder(
+                                array(
+                                    new CarouselColumnTemplateBuilder(
+                                        'จะให้ทำอะไรละ',
+                                        '',
+                                        'https://f4.bcbits.com/img/a1831399774_16.jpg',
+                                        $actionBuilder
+                                    ),                                     
+                                )
                             )
                         );
-                        break;
+                        break;  
 					case "ส่งสติกเกอร์หน่อย":
 						//https://developers.line.me/media/messaging-api/sticker_list.pdf
                         $stickerID = rand(1,17);
