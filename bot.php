@@ -105,7 +105,30 @@ if(!is_null($events)){
             case 'text':
                 $userMessage = strtolower($userMessage); // แปลงเป็นตัวเล็ก สำหรับทดสอบ
                 switch ($userMessage) {
-					case "p":
+					case "friday":
+						$replyData = new TemplateMessageBuilder('Menu',
+                            new ConfirmTemplateBuilder(
+                                    'จะให้ทำอะไรละ ?',
+                                    array(
+                                        new MessageTemplateActionBuilder(
+                                            'สวัสดี',
+                                            'สวัสดี'
+                                        ),
+                                        new MessageTemplateActionBuilder(
+                                            'ส่งสติกเกอร์หน่อย',
+                                            'ส่งสติกเกอร์หน่อย'
+                                        )
+                                    )
+                            )
+                        );
+                        break;
+					case "ส่งสติกเกอร์หน่อย":
+						//https://developers.line.me/media/messaging-api/sticker_list.pdf
+                        $stickerID = rand(1,527);
+                        $packageID = rand(1,2);
+                        $replyData = new StickerMessageBuilder($packageID,$stickerID);
+                        break;  
+					case "/p":
                         // เรียกดูข้อมูลโพรไฟล์ของ Line user โดยส่งค่า userID ของผู้ใช้ LINE ไปดึงข้อมูล
                         $response = $bot->getProfile($userID);
                         if ($response->isSucceeded()) {
@@ -174,32 +197,32 @@ if(!is_null($events)){
 						$failMessage = json_encode($idMessage.' '.$response->getHTTPStatus() . ' ' . $response->getRawBody());
 						$replyData = new TextMessageBuilder($failMessage);  
 						break;  */
-                    case "t":
+                    case "/t":
                         $textReplyMessage = "Bot ตอบกลับคุณเป็นข้อความ";
                         $replyData = new TextMessageBuilder($textReplyMessage);
                         break;
-                    case "i":
+                    case "/i":
                         $picFullSize = 'https://www.mywebsite.com/imgsrc/photos/f/simpleflower';
                         $picThumbnail = 'https://www.mywebsite.com/imgsrc/photos/f/simpleflower/240';
                         $replyData = new ImageMessageBuilder($picFullSize,$picThumbnail);
                         break;
-                    case "v":
+                    case "/v":
                         $picThumbnail = 'https://www.mywebsite.com/imgsrc/photos/f/sampleimage/240';
                         $videoUrl = "https://www.ninenik.com/line/simplevideo.mp4";             
                         $replyData = new VideoMessageBuilder($videoUrl,$picThumbnail);
                         break;
-                    case "a":
+                    case "/a":
                         $audioUrl = "https://www.ninenik.com/line/S_6988827932080.wav";
                         $replyData = new AudioMessageBuilder($audioUrl,20000);
                         break;
-                    case "l":
+                    case "/l":
                         $placeName = "ที่ตั้งร้าน";
                         $placeAddress = "แขวง พลับพลา เขต วังทองหลาง กรุงเทพมหานคร ประเทศไทย";
                         $latitude = 13.780401863217657;
                         $longitude = 100.61141967773438;
                         $replyData = new LocationMessageBuilder($placeName, $placeAddress, $latitude ,$longitude);              
                         break;
-                    case "m":
+                    case "/m":
                         $textReplyMessage = "Bot ตอบกลับคุณเป็นข้อความ";
                         $textMessage = new TextMessageBuilder($textReplyMessage);
                                          
@@ -219,13 +242,13 @@ if(!is_null($events)){
                         $multiMessage->add($locationMessage);
                         $replyData = $multiMessage;                                     
                         break;                  
-                    case "s":
+                    case "/s":
 						//https://developers.line.me/media/messaging-api/sticker_list.pdf
                         $stickerID = 22;
                         $packageID = 2;
                         $replyData = new StickerMessageBuilder($packageID,$stickerID);
                         break;      
-                    case "im":
+                    case "/im":
                         $imageMapUrl = 'https://www.mywebsite.com/imgsrc/photos/w/sampleimagemap';
                         $replyData = new ImagemapMessageBuilder(
                             $imageMapUrl,
@@ -242,7 +265,7 @@ if(!is_null($events)){
                                     )
                             )); 
                         break;          
-                    case "tm":
+                    case "/tm":
                         $replyData = new TemplateMessageBuilder('Confirm Template',
                             new ConfirmTemplateBuilder(
                                     'Confirm template builder',
@@ -259,7 +282,7 @@ if(!is_null($events)){
                             )
                         );
                         break;          
-                    case "t_b":
+                    case "/t_b":
                         // กำหนด action 4 ปุ่ม 4 ประเภท
                         $actionBuilder = array(
                             new MessageTemplateActionBuilder(
@@ -300,7 +323,7 @@ if(!is_null($events)){
                             )
                         );              
                         break;      
-                    case "t_f":
+                    case "/t_f":
                         $replyData = new TemplateMessageBuilder('Confirm Template',
                             new ConfirmTemplateBuilder(
                                     'Confirm template builder', // ข้อความแนะนหรือบอกวิธีการ หรือคำอธิบาย
@@ -317,7 +340,7 @@ if(!is_null($events)){
                             )
                         );
                         break;      
-                    case "t_c":
+                    case "/t_c":
                         // กำหนด action 4 ปุ่ม 4 ประเภท
                         $actionBuilder = array(
                             new MessageTemplateActionBuilder(
@@ -362,7 +385,7 @@ if(!is_null($events)){
                             )
                         );
                         break;      
-                    case "t_ic":
+                    case "/t_ic":
                         $replyData = new TemplateMessageBuilder('Image Carousel',
                             new ImageCarouselTemplateBuilder(
                                 array(
