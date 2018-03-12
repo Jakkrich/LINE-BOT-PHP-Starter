@@ -19,7 +19,7 @@ $bot = new BOT_API(LINE_MESSAGE_CHANNEL_SECRET, LINE_MESSAGE_ACCESS_TOKEN);
 	
 if (!empty($bot->isEvents)) {
 		
-	$bot->replyMessageNew($bot->replyToken, json_encode($bot));
+	$bot->replyMessageNew($bot->replyToken, json_encode($bot, JSON_PRETTY_PRINT));
 
 	if ($bot->isSuccess()) {
 		echo 'Succeeded!';
