@@ -75,24 +75,24 @@ if(!is_null($events)){
                     $replyData = new TextMessageBuilder($textReplyMessage);
                     break;
                 case "i":
-                    $picFullSize = 'https://www.mywebsite.com/imgsrc/photos/f/simpleflower';
-                    $picThumbnail = 'https://www.mywebsite.com/imgsrc/photos/f/simpleflower/240';
+                    $picFullSize = 'https://vignette.wikia.nocookie.net/ironman/images/8/82/FRIDAY.jpg/revision/latest/scale-to-width-down/300?cb=20150506145228';
+                    $picThumbnail = 'https://vignette.wikia.nocookie.net/ironman/images/8/82/FRIDAY.jpg/revision/latest/scale-to-width-down/300?cb=20150506145228';
                     $replyData = new ImageMessageBuilder($picFullSize,$picThumbnail);
                     break;
-                case "v":
+                /*case "v":
                     $picThumbnail = 'https://www.mywebsite.com/imgsrc/photos/f/sampleimage/240';
                     $videoUrl = "https://www.mywebsite.com/simplevideo.mp4";                
                     $replyData = new VideoMessageBuilder($videoUrl,$picThumbnail);
-                    break;
-                case "a":
+                    break;*/
+                /*case "a":
                     $audioUrl = "https://www.mywebsite.com/simpleaudio.mp3";
                     $replyData = new AudioMessageBuilder($audioUrl,27000);
-                    break;
+                    break;*/
                 case "l":
-                    $placeName = "ที่ตั้งร้าน";
-                    $placeAddress = "แขวง พลับพลา เขต วังทองหลาง กรุงเทพมหานคร ประเทศไทย";
-                    $latitude = 13.780401863217657;
-                    $longitude = 100.61141967773438;
+                    $placeName = "สวทช.";
+                    $placeAddress = "สำนักงานพัฒนาวิทยาศาสตร์และเทคโนโลยีแห่งชาติ";
+                    $latitude = 14.0771597;
+                    $longitude = 100.6005289;
                     $replyData = new LocationMessageBuilder($placeName, $placeAddress, $latitude ,$longitude);              
                     break;
                 case "s":
@@ -100,7 +100,7 @@ if(!is_null($events)){
                     $packageID = 2;
                     $replyData = new StickerMessageBuilder($packageID,$stickerID);
                     break;      
-                case "im":
+                /*case "im":
                     $imageMapUrl = 'https://www.mywebsite.com/imgsrc/photos/w/sampleimagemap';
                     $replyData = new ImagemapMessageBuilder(
                         $imageMapUrl,
@@ -116,7 +116,7 @@ if(!is_null($events)){
                                 new AreaBuilder(520,0,520,699)
                                 )
                         )); 
-                    break;          
+                    break;*/        
                 case "tm":
                     $replyData = new TemplateMessageBuilder('Confirm Template',
                         new ConfirmTemplateBuilder(
