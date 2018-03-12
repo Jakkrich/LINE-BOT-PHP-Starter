@@ -75,8 +75,8 @@ if(!is_null($events)){
                     $replyData = new TextMessageBuilder($textReplyMessage);
                     break;
                 case "i":
-                    $picFullSize = 'https://vignette.wikia.nocookie.net/ironman/images/8/82/FRIDAY.jpg/revision/latest/scale-to-width-down/300?cb=20150506145228';
-                    $picThumbnail = 'https://vignette.wikia.nocookie.net/ironman/images/8/82/FRIDAY.jpg/revision/latest/scale-to-width-down/300?cb=20150506145228';
+                    $picFullSize = 'https://tctechcrunch2011.files.wordpress.com/2017/04/gettyimages-171206284.jpg?w=738';
+                    $picThumbnail = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRgvHZq8z3uM56jAtNfdyvEYa1Jp8U6DvJS5c6q_aotDi0mQTPBDQ';
                     $replyData = new ImageMessageBuilder($picFullSize,$picThumbnail);
                     break;
                 /*case "v":
@@ -91,8 +91,8 @@ if(!is_null($events)){
                 case "l":
                     $placeName = "สวทช.";
                     $placeAddress = "สำนักงานพัฒนาวิทยาศาสตร์และเทคโนโลยีแห่งชาติ";
-                    $latitude = 14.077076;
-                    $longitude = 100.601741;
+                    $latitude = 14.077149;
+                    $longitude = 100.601773;
                     $replyData = new LocationMessageBuilder($placeName, $placeAddress, $latitude ,$longitude);              
                     break;
                 case "s":
@@ -133,7 +133,27 @@ if(!is_null($events)){
                                 )
                         )
                     );
-                    break;                                                                                                                          
+                    break;
+				case "m":
+					$textReplyMessage = "Bot ตอบกลับคุณเป็นข้อความ";
+					$textMessage = new TextMessageBuilder($textReplyMessage);
+									 
+					$picFullSize = 'https://www.mywebsite.com/imgsrc/photos/f/simpleflower';
+					$picThumbnail = 'https://www.mywebsite.com/imgsrc/photos/f/simpleflower/240';
+					$imageMessage = new ImageMessageBuilder($picFullSize,$picThumbnail);
+									 
+					$placeName = "สวทช.";
+                    $placeAddress = "สำนักงานพัฒนาวิทยาศาสตร์และเทคโนโลยีแห่งชาติ";
+                    $latitude = 14.077149;
+                    $longitude = 100.601773;
+					$locationMessage = new LocationMessageBuilder($placeName, $placeAddress, $latitude ,$longitude);        
+				 
+					$multiMessage =     new MultiMessageBuilder;
+					$multiMessage->add($textMessage);
+					$multiMessage->add($imageMessage);
+					$multiMessage->add($locationMessage);
+					$replyData = $multiMessage;                                     
+					break;  
                 default:
                     $textReplyMessage = " คุณไม่ได้พิมพ์ ค่า ตามที่กำหนด";
                     $replyData = new TextMessageBuilder($textReplyMessage);         
