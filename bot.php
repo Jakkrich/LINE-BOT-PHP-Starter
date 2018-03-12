@@ -57,8 +57,8 @@ $bot = new LINEBot($httpClient, array('channelSecret' => LINE_MESSAGE_CHANNEL_SE
  
 // คำสั่งรอรับการส่งค่ามาของ LINE Messaging API
 $content = file_get_contents('php://input');
- 
-// แปลงข้อความรูปแบบ JSON  ให้อยู่ในโครงสร้างตัวแปร array
+
+$replyToken = "";
 // แปลงข้อความรูปแบบ JSON  ให้อยู่ในโครงสร้างตัวแปร array
 $events = json_decode($content, true);
 if(!is_null($events)){
@@ -148,7 +148,7 @@ if(!is_null($events)){
                     $longitude = 100.601773;
 					$locationMessage = new LocationMessageBuilder($placeName, $placeAddress, $latitude ,$longitude);        
 				 
-					$multiMessage =     new MultiMessageBuilder;
+					$multiMessage = new MultiMessageBuilder;
 					$multiMessage->add($textMessage);
 					$multiMessage->add($imageMessage);
 					$multiMessage->add($locationMessage);
