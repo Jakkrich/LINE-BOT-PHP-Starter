@@ -59,6 +59,7 @@ $bot = new LINEBot($httpClient, array('channelSecret' => LINE_MESSAGE_CHANNEL_SE
 $content = file_get_contents('php://input');
 
 $replyToken = "";
+$replyData = "";
 // แปลงข้อความรูปแบบ JSON  ให้อยู่ในโครงสร้างตัวแปร array
 $events = json_decode($content, true);
 if(!is_null($events)){
