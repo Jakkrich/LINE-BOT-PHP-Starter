@@ -106,33 +106,46 @@ if(!is_null($events)){
                 $userMessage = strtolower($userMessage); // แปลงเป็นตัวเล็ก สำหรับทดสอบ
                 switch ($userMessage) {
 					case "friday":
-                        $actionBuilder = array(
-                            new MessageTemplateActionBuilder(
-                                'สวัสดี',// ข้อความแสดงในปุ่ม
-                                'สวัสดี' // ข้อความที่จะแสดงฝั่งผู้ใช้ เมื่อคลิกเลือก
-                            ),
+						// กำหนด action 4 ปุ่ม 4 ประเภท
+						$actionBuilder = array(
 							new MessageTemplateActionBuilder(
-                                'ส่งสติกเกอร์หน่อย',
+								'สวัสดี',// ข้อความแสดงในปุ่ม
+                                'สวัสดี' // ข้อความที่จะแสดงฝั่งผู้ใช้ เมื่อคลิกเลือก
+							),
+							new MessageTemplateActionBuilder(
+								'ส่งสติกเกอร์หน่อย',
 								'ส่งสติกเกอร์หน่อย'
-                            ),
-                            new UriTemplateActionBuilder(
-                                'พาไปหน้า i', // ข้อความแสดงในปุ่ม
+							),
+							new UriTemplateActionBuilder(
+								'พาไปหน้า i', // ข้อความแสดงในปุ่ม
                                 'https://i.nstda.or.th'
-                            ),   
-                        );
-                        $replyData = new TemplateMessageBuilder('Carousel',
-                            new CarouselTemplateBuilder(
-                                array(
-                                    new CarouselColumnTemplateBuilder(
-                                        'จะให้ทำอะไรละ',
-                                        '',
-                                        'https://f4.bcbits.com/img/a1831399774_16.jpg',
-                                        $actionBuilder
-                                    ),                                     
-                                )
-                            )
-                        );
-                        break;  
+							),
+						);
+						$replyData = new TemplateMessageBuilder('Carousel',
+							new CarouselTemplateBuilder(
+								array(
+									new CarouselColumnTemplateBuilder(
+										'Title Carousel',
+										'Description Carousel',
+										'https://www.mywebsite.com/imgsrc/photos/f/sampleimage/700',
+										$actionBuilder
+									),
+									new CarouselColumnTemplateBuilder(
+										'Title Carousel',
+										'Description Carousel',
+										'https://www.mywebsite.com/imgsrc/photos/f/sampleimage/700',
+										$actionBuilder
+									),
+									new CarouselColumnTemplateBuilder(
+										'ทำไรดี',
+										'',
+										'https://www.mywebsite.com/imgsrc/photos/f/sampleimage/700',
+										$actionBuilder
+									),                                          
+								)
+							)
+						);
+						break;   
 					case "ส่งสติกเกอร์หน่อย":
 						//https://developers.line.me/media/messaging-api/sticker_list.pdf
                         $stickerID = rand(1,17);
