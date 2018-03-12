@@ -18,7 +18,7 @@ include ('line-bot.php');
 $bot = new BOT_API(LINE_MESSAGE_CHANNEL_SECRET, LINE_MESSAGE_ACCESS_TOKEN);
 	
 if (!empty($bot->isEvents)) {
-	$events = json_decode($content, true);
+	$events = json_decode($bot, true);
 	if(!is_null($events)){
 		// ถ้ามีค่า สร้างตัวแปรเก็บ replyToken ไว้ใช้งาน
 		$replyToken = $events['events'][0]['replyToken'];
