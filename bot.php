@@ -117,7 +117,7 @@ if(!is_null($events)){
 								'ส่งสติกเกอร์หน่อย'
 							),
 							new UriTemplateActionBuilder(
-								'พาไปหน้า i', // ข้อความแสดงในปุ่ม
+								'พาไปหน้า i.nstda', // ข้อความแสดงในปุ่ม
                                 'https://i.nstda.or.th'
 							),
 						);
@@ -125,23 +125,12 @@ if(!is_null($events)){
 							new CarouselTemplateBuilder(
 								array(
 									new CarouselColumnTemplateBuilder(
-										'Title Carousel',
-										'Description Carousel',
+										'Menu',
+										'จะให้ทำอะไร ?',
 										'https://www.mywebsite.com/imgsrc/photos/f/sampleimage/700',
 										$actionBuilder
 									),
-									new CarouselColumnTemplateBuilder(
-										'Title Carousel',
-										'Description Carousel',
-										'https://www.mywebsite.com/imgsrc/photos/f/sampleimage/700',
-										$actionBuilder
-									),
-									new CarouselColumnTemplateBuilder(
-										'Title Carousel',
-										'Description Carousel',
-										'https://www.mywebsite.com/imgsrc/photos/f/sampleimage/700',
-										$actionBuilder
-									),                                          
+									                                          
 								)
 							)
 						);
