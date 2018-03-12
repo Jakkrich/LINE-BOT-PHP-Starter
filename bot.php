@@ -124,8 +124,8 @@ if(!is_null($events)){
                         break;
 					case "ส่งสติกเกอร์หน่อย":
 						//https://developers.line.me/media/messaging-api/sticker_list.pdf
-                        $stickerID = rand(1,527);
-                        $packageID = rand(1,2);
+                        $stickerID = rand(1,17);
+                        $packageID = 1;
                         $replyData = new StickerMessageBuilder($packageID,$stickerID);
                         break;  
 					case "/p":
