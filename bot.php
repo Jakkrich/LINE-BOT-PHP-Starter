@@ -1,34 +1,33 @@
 <?php
-	$access_token = 'HcFHTh85/WUrDeR85X7MjkKHK1QLkyadxIYs0UCCZ+D7/DmdGd0f5HrWslIOeS/9ONeSJK5XmKzZPOIRwB7usy99mRvB8z8dj5X0OV6xBWFSYErp2zdZgejqTT5T/zcbZZj/EQ5wxfxKnz4WvM7UMwdB04t89/1O/w1cDnyilFU=';
-	$content = file_get_contents('php://input');// Parse JSON
-	$events = json_decode($content, true);// Validate parsed JSON data
-	if (!is_null($events['events'])) {	// Loop through each event	
-		foreach ($events['events'] as $event) {		// Reply only when message sent is in 'text' format		
-			if ($event['type'] == 'message' && $event['message']['type'] == 'text') {			// Get text sent			
-				$text = $event['message']['text'];			// Get replyToken			
-				$replyToken = $event['replyToken'];			// Build message to reply back			
-				$messages = [
-					'type' => 'text',
-					'text' => $text
-				];			// Make a POST Request to Messaging API to reply to sender			
-				$url = 'https://api.line.me/v2/bot/message/reply';			
-				$data = [
-						'replyToken' => $replyToken,
-						'messages' => [$messages],
-				];		
-				$post = json_encode($data);			
-				$headers = array('Content-Type: application/json', 'Authorization: Bearer ' . $access_token);			
-				$ch = curl_init($url);			
-				curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");			
-				curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);			
-				curl_setopt($ch, CURLOPT_POSTFIELDS, $post);			
-				curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);			
-				curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);			
-				$result = curl_exec($ch);			
-				curl_close($ch);			
-				echo $result . "";		
-			}	
-		}
-	}
-	echo "OK";
+// กรณีต้องการตรวจสอบการแจ้ง error ให้เปิด 3 บรรทัดล่างนี้ให้ทำงาน กรณีไม่ ให้ comment ปิดไป
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+ 
+// include composer autoload
+require_once 'vendor/autoload.php';
+ 
+// การตั้งเกี่ยวกับ bot
+require_once 'bot_settings.php';
+ 
+// กรณีมีการเชื่อมต่อกับฐานข้อมูล
+//require_once("dbconnect.php");
+ 
+include ('line-bot.php');
+
+$bot = new BOT_API(LINE_MESSAGE_CHANNEL_SECRET, LINE_MESSAGE_ACCESS_TOKEN);
 	
+if (!empty($bot->isEvents)) {
+		
+	$bot->replyMessageNew($bot->replyToken, json_encode($bot->message));
+
+	if ($bot->isSuccess()) {
+		echo 'Succeeded!';
+		exit();
+	}
+
+	// Failed
+	echo $bot->response->getHTTPStatus . ' ' . $bot->response->getRawBody(); 
+	exit();
+
+}
