@@ -137,8 +137,8 @@ if(!is_null($events)){
 										$actionBuilder
 									),
 									new CarouselColumnTemplateBuilder(
-										'ทำไรดี',
-										'',
+										'Title Carousel',
+										'Description Carousel',
 										'https://www.mywebsite.com/imgsrc/photos/f/sampleimage/700',
 										$actionBuilder
 									),                                          
