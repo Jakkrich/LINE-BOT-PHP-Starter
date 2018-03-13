@@ -215,12 +215,12 @@ if(!is_null($events)){
                         $replyData = new TextMessageBuilder($textReplyMessage);
                         break;
                     case "/i":
-                        $picFullSize = 'https://www.mywebsite.com/imgsrc/photos/f/simpleflower';
-                        $picThumbnail = 'https://www.mywebsite.com/imgsrc/photos/f/simpleflower/240';
+                        $picFullSize = 'https://raw.githubusercontent.com/kittinan/Sample-Line-Bot/master/images/beer.jpg';
+                        $picThumbnail = 'https://raw.githubusercontent.com/kittinan/Sample-Line-Bot/master/images/beer_preview.jpg';
                         $replyData = new ImageMessageBuilder($picFullSize,$picThumbnail);
                         break;
                     case "/v":
-                        $picThumbnail = 'https://www.mywebsite.com/imgsrc/photos/f/sampleimage/240';
+                        $picThumbnail = 'https://raw.githubusercontent.com/kittinan/Sample-Line-Bot/master/images/beer_preview.jpg';
                         $videoUrl = "https://www.ninenik.com/line/simplevideo.mp4";             
                         $replyData = new VideoMessageBuilder($videoUrl,$picThumbnail);
                         break;
