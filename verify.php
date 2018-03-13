@@ -1,5 +1,5 @@
 <?php
-	$access_token = 'HcFHTh85/WUrDeR85X7MjkKHK1QLkyadxIYs0UCCZ+D7/DmdGd0f5HrWslIOeS/9ONeSJK5XmKzZPOIRwB7usy99mRvB8z8dj5X0OV6xBWFSYErp2zdZgejqTT5T/zcbZZj/EQ5wxfxKnz4WvM7UMwdB04t89/1O/w1cDnyilFU=';
+	$access_token = getenv('LINE_MESSAGE_ACCESS_TOKEN');
 	$url = 'https://api.line.me/v1/oauth/verify';
 	$headers = array('Authorization: Bearer ' . $access_token);
 	$ch = curl_init($url);
