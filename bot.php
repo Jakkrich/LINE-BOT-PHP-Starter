@@ -421,8 +421,8 @@ if(!is_null($events)){
                         );
                         break;                                                                                                                                                                                                  
                     default:
-                        $textReplyMessage = " คุณไม่ได้พิมพ์ ค่า ตามที่กำหนด";
-                        $replyData = new TextMessageBuilder($textReplyMessage);         
+                        //$textReplyMessage = " คุณไม่ได้พิมพ์ ค่า ตามที่กำหนด";
+                        $replyData = new TextMessageBuilder($userMessage);         
                         break;                                      
                 }
                 break;
