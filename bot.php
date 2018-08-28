@@ -160,7 +160,7 @@ if(!is_null($events)){
                         $response = $bot->getProfile($userID);
                         if ($response->isSucceeded()) {
                             // ดึงค่ามาแบบเป็น JSON String โดยใช้คำสั่ง getRawBody() กรณีเป้นข้อความ text
-                            $textReplyMessage = $events; // return string    
+                            $textReplyMessage = $events['events']; // return string    
 			    // $textReplyMessage = $userID; // return string   
                             $replyData = new TextMessageBuilder($textReplyMessage);         
                             break;              
@@ -437,7 +437,7 @@ if(!is_null($events)){
                         break;                                                                                                                                                                                                  
                     default:
                         //$textReplyMessage = " คุณไม่ได้พิมพ์ ค่า ตามที่กำหนด";
-                        $replyData = new TextMessageBuilder($userMessage);         
+                        //$replyData = new TextMessageBuilder($userMessage);         
                         break;                                      
                 }
                 break;
