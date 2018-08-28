@@ -146,7 +146,8 @@ if(!is_null($events)){
                         $response = $bot->getProfile($userID);
                         if ($response->isSucceeded()) {
                             // ดึงค่ามาแบบเป็น JSON String โดยใช้คำสั่ง getRawBody() กรณีเป้นข้อความ text
-                            $textReplyMessage = $response->getRawBody(); // return string            
+                            // $textReplyMessage = $response->getRawBody(); // return string    
+			    $textReplyMessage = $userID; // return string   
                             $replyData = new TextMessageBuilder($textReplyMessage);         
                             break;              
                         }
