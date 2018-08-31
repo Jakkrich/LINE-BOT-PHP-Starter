@@ -54,72 +54,10 @@ use LINE\LINEBot\MessageBuilder\TemplateBuilder\ImageCarouselColumnTemplateBuild
  
 $httpClient = new CurlHTTPClient(LINE_MESSAGE_ACCESS_TOKEN);
 $bot = new LINEBot($httpClient, array('channelSecret' => LINE_MESSAGE_CHANNEL_SECRET));
-
+ 
 // คำสั่งรอรับการส่งค่ามาของ LINE Messaging API
 $content = file_get_contents('php://input');
  
-  
-// กำหนดค่า signature สำหรับตรวจสอบข้อมูลที่ส่งมาว่าเป็นข้อมูลจาก LINE
-$hash = hash_hmac('sha256', $content, LINE_MESSAGE_CHANNEL_SECRET, true);
-$signature = base64_encode($hash);
- 
-// แปลงค่าข้อมูลที่ได้รับจาก LINE เป็น array ของ Event Object
-$events = $bot->parseEventRequest($content, $signature);
-$eventObj = $events[0]; // Event Object ของ array แรก
- 
-// ดึงค่าประเภทของ Event มาไว้ในตัวแปร มีทั้งหมด 7 event
-$eventType = $eventObj->getType();
- 
-// สร้างตัวแปร ไว้เก็บ sourceId ของแต่ละประเภท
-$userId = NULL;
-$groupId = NULL;
-$roomId = NULL;
-// สร้างตัวแปร replyToken สำหรับกรณีใช้ตอบกลับข้อความ
-$replyToken = NULL;
-// สร้างตัวแปร ไว้เก็บค่าว่าเป้น Event ประเภทไหน
-$eventMessage = NULL;
-$eventPostback = NULL;
-$eventJoin = NULL;
-$eventLeave = NULL;
-$eventFollow = NULL;
-$eventUnfollow = NULL;
-$eventBeacon = NULL;
-// เงื่อนไขการกำหนดประเภท Event 
-switch($eventType){
-    case 'message': $eventMessage = true; break;    
-    case 'postback': $eventPostback = true; break;  
-    case 'join': $eventJoin = true; break;  
-    case 'leave': $eventLeave = true; break;    
-    case 'follow': $eventFollow = true; break;  
-    case 'unfollow': $eventUnfollow = true; break;  
-    case 'beacon': $eventBeacon = true; break;                          
-}
-// สร้างตัวแปรเก็บค่า groupId กรณีเป็น Event ที่เกิดขึ้นใน GROUP
-if($eventObj->isGroupEvent()){
-    $groupId = $eventObj->getGroupId();  
-}
-// สร้างตัวแปรเก็บค่า roomId กรณีเป็น Event ที่เกิดขึ้นใน ROOM
-if($eventObj->isRoomEvent()){
-    $roomId = $eventObj->getRoomId();            
-}
-// ดึงค่า replyToken มาไว้ใช้งาน ทุกๆ Event ที่ไม่ใช่ Leave และ Unfollow Event
-if(is_null($eventLeave) && is_null($eventUnfollow)){
-    $replyToken = $eventObj->getReplyToken();    
-}
-// ดึงค่า userId มาไว้ใช้งาน ทุกๆ Event ที่ไม่ใช่ Leave Event
-if(is_null($eventLeave)){
-    $userId = $eventObj->getUserId();
-}
-// ตรวจสอบถ้าเป็น Join Event ให้ bot ส่งข้อความใน GROUP ว่าเข้าร่วม GROUP แล้ว
-if(!is_null($eventJoin)){
-    $textReplyMessage = "ขอเข้ากลุ่มด้วยน่ะ GROUP ID:: ".$groupId;
-    $replyData = new TextMessageBuilder($textReplyMessage);                 
-}
-// ตรวจสอบถ้าเป็น Leave Event เมื่อ bot ออกจากกลุ่ม
-if(!is_null($eventLeave)){
-     
-}
-
 // แปลงข้อความรูปแบบ JSON  ให้อยู่ในโครงสร้างตัวแปร array
 $events = json_decode($content, true);
 if(!is_null($events)){
