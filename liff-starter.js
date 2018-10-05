@@ -32,7 +32,7 @@ function initializeApp(data) {
         }, {
             type: 'sticker',
             packageId: '2',
-            stickerId: '144'
+            stickerId: '150'
         }]).then(function () {
             window.alert("Message sent");
         }).catch(function (error) {
