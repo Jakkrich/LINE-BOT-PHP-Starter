@@ -216,7 +216,7 @@ if (!empty($_POST['token'])) {
         <div class="jumbotron">
         <h1>Your Channel access token</h1>
         <p><a href="https://developers.line.me/console/">https://developers.line.me/console/</a></p>
-        <form action="./" method="POST" class="form-inline" role="form">
+        <form action="" method="POST" class="form-inline" role="form">
             <input type="text" class="form-control input-lg" id="token" name="token" placeholder="Access Token">
             <button type="submit" class="btn btn-lg btn-primary">Submit</button>
         </form>
@@ -237,11 +237,11 @@ $(function () {
         let liff = $(this).val();
         var $temp = $("<input>");
         $("body").append($temp);
-        $temp.val(`line://app/${liff}`).select();
+        $temp.val('line://app/${liff}').select();
         document.execCommand("copy");
         $temp.remove();
         $('<span />', { style: 'display:none' })
-            .html( `<span class="label label-success label-copy">copied! line://app/${liff}</span>` )
+            .html( '<span class="label label-success label-copy">copied! line://app/${liff}</span>' )
             .appendTo($(this).offsetParent())
             .fadeIn('slow', function () {
                     var el = $(this);
