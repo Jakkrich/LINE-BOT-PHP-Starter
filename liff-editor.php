@@ -2,7 +2,7 @@
 session_start();
 if (isset($_GET['clear'])) {
     session_destroy();
-    header('Location: ./');
+    header('Location: liff-editor.php');
 }
 if (!empty($_POST['token'])) {
     $_SESSION['ACCESS_TOKEN'] = $_POST['token'];
@@ -63,7 +63,7 @@ if (!empty($_POST['token'])) {
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                     <strong>Deleted!</strong> '.$_GET['liffid'].'
                 </div>
-                <script>setTimeout(function(){location.href="./"} , 3000);</script>';
+                <script>setTimeout(function(){location.href="liff-editor.php"} , 3000);</script>';
             }
         }
         if (!empty($_POST['mode']) && $_POST['mode'] === 'update') {
