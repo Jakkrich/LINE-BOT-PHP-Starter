@@ -277,7 +277,7 @@ if(!is_null($events)){
                         $replyData = new StickerMessageBuilder($packageID,$stickerID);
                         break;      
                     case "/im":
-                        $imageMapUrl = 'https://www.pngkit.com/png/full/159-1590209_images-twig.png';
+                        $imageMapUrl = 'https://raw.githubusercontent.com/kittinan/Sample-Line-Bot/master/images/beer.jpg';
                         $replyData = new ImagemapMessageBuilder(
                             $imageMapUrl,
                             'This is Title',
