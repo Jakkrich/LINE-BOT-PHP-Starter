@@ -277,19 +277,19 @@ if(!is_null($events)){
                         $replyData = new StickerMessageBuilder($packageID,$stickerID);
                         break;      
                     case "/im":
-                        $imageMapUrl = 'https://www.mywebsite.com/imgsrc/photos/w/sampleimagemap';
+                        $imageMapUrl = 'https://i1.wp.com/msaf.com.fj/wp-content/uploads/2017/06/500x500.png';
                         $replyData = new ImagemapMessageBuilder(
                             $imageMapUrl,
                             'This is Title',
-                            new BaseSizeBuilder(699,1040),
+                            new BaseSizeBuilder(500,500),
                             array(
                                 new ImagemapMessageActionBuilder(
                                     'test image map',
-                                    new AreaBuilder(0,0,520,699)
+                                    new AreaBuilder(0,0,250,500)
                                     ),
                                 new ImagemapUriActionBuilder(
                                     'http://www.ninenik.com',
-                                    new AreaBuilder(520,0,520,699)
+                                    new AreaBuilder(250,0,500,500)
                                     )
                             )); 
                         break;          
