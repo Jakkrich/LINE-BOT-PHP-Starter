@@ -13,6 +13,10 @@
 </head>
 <body>
 <div class="container">
+
+	<button type="button" onClick="clickME()">Click me</button>
+    <p>Clicks: <a id="clicks">0</a></p>
+
     <div class="row">
         <div class="col-sm-6" style="padding: 6px;">
             <div class="card">
@@ -69,10 +73,22 @@
 </div>
 </body>
 <script>
-window.onload = function(){
-    initVConsole();
-    initLiff();
+
+var clicks = 0;
+function clickME() {
+	clicks += 1;
+	document.getElementById("clicks").innerHTML = clicks;
+	if(clicks == 10){
+		initVConsole();
+		initLiff();
+	}
 }
+
+window.onload = function(){
+    //initVConsole();
+    //initLiff();
+}
+
 // Initialize vConsole
 function initVConsole() {
     window.vConsole = new window.VConsole({
