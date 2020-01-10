@@ -118,8 +118,8 @@ function showPosition(position) {
 		liff.sendMessages([
 			{
 				"type": "location",
-				"title": "My location",
-				"address": "อยู่ที่นี่",
+				"title": userDisplayName + " location",
+				"address": userDisplayName + "อยู่ที่นี่",
 				"latitude": position.coords.latitude,
 				"longitude": position.coords.longitude
 			}
