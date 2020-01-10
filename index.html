@@ -112,8 +112,27 @@ function getLocation() {
 }
 
 function showPosition(position) {
-  x.innerHTML = "Latitude: " + position.coords.latitude + 
-  "<br>Longitude: " + position.coords.longitude;
+  x.innerHTML = "Latitude: " + position.coords.latitude + "<br>Longitude: " + position.coords.longitude;
+  liff.getProfile().then(profile => {
+		const userDisplayName = profile.displayName
+		liff.sendMessages([
+			{
+				"type": "location",
+				"title": "My location",
+				"address": "อยู่ที่นี่",
+				"latitude": position.coords.latitude,
+				"longitude": position.coords.longitude
+			}
+		])
+		.then(() => {
+			console.log('message sent');
+		})
+		.catch((err) => {
+			console.error('error', err);
+		}); })
+	.catch((err) => {
+		console.error('LIFF getProfile failed', err);
+	});
 }
 
 // Initialize vConsole
