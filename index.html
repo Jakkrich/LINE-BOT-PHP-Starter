@@ -17,6 +17,18 @@
 	<button type="button" onClick="clickME()">Click me 10 Hit</button>
     <p>Clicks: <a id="clicks">0</a></p>
 
+	<div class="row">
+        <div class="col-sm-12" style="padding: 6px;">
+            <div class="card">
+                <div class="card-header">Coordinates</div>
+                <div class="card-body">
+                    <p class="card-text" id="demoLocation">ผลลัพธ์</p>
+                    <a href="#" class="btn btn-secondary" onclick="getLocation();">GetLocation</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="row">
         <div class="col-sm-6" style="padding: 6px;">
             <div class="card">
@@ -87,6 +99,21 @@ function clickME() {
 window.onload = function(){
     //initVConsole();
     //initLiff();
+}
+
+var x = document.getElementById("demoLocation");
+
+function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(showPosition);
+  } else { 
+    x.innerHTML = "Geolocation is not supported by this browser.";
+  }
+}
+
+function showPosition(position) {
+  x.innerHTML = "Latitude: " + position.coords.latitude + 
+  "<br>Longitude: " + position.coords.longitude;
 }
 
 // Initialize vConsole
