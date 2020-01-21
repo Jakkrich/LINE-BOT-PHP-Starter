@@ -111,9 +111,7 @@ function initializeLiff(myLiffId) {
 	liff.init({
 		liffId: myLiffId
 	}, () => {
-		console.log('ok');
-		console.log(liff);
-		console.log('ok1');
+		runApp();
 		if (liff.isInClient()) {
 			chk_register();
 		} else {
