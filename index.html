@@ -115,7 +115,7 @@ function initializeLiff(myLiffId) {
 			chk_register();
 		} else {
 			if (liff.isLoggedIn()) {
-				openweb();
+				runApp()();
 			} else {
 				liff.login();
 			}
