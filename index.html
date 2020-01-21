@@ -1,80 +1,205 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html lang="zh-TW" xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html lang="ja">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="viewport" content="width=device-width; initial-scale=1.0" />
-<meta http-equiv="X-UA-Compatible" content="IE=Edge">
-<title>LIFF Vue-router 測試</title>
+    <title>My LIFF app</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <!-- vConsole -->
+    <script src="./lib/vconsole.min.js"></script>
+    <!-- LIFF -->
+    <script src="https://static.line-scdn.net/liff/edge/2.1/sdk.js"></script>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+<div class="container">
 
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue-router@2.7.0/dist/vue-router.js"></script>
-<script type="text/javascript" src="https://d.line-scdn.net/liff/1.0/sdk.js"></script>
-<script type="text/javascript" src="https://melixyen.github.io/liff-hand/liffhand.js"></script>
+	<img id="pictureUrl" width="25%">
+	<p id="userId"></p>
+	<p id="displayName"></p>
+	<p id="statusMessage"></p>
 
-<script type="text/javascript">
-Vue.config.productionTip = false;
+	<div class="row">
+        <div class="col-sm-12" style="padding: 6px;">
+            <div class="card">
+                <div class="card-header">Coordinates</div>
+                <div class="card-body">
+                    <p class="card-text" id="demoLocation">ผลลัพธ์</p>
+                    <a href="#" class="btn btn-secondary" onclick="getLocation();">Send Location</a>
+                </div>
+            </div>
+        </div>
+    </div>
 
-function initVue(){
-    
-    
-    var indexArea = {
-        template: '<div>' +
-            '<div>我是首頁</div>' +
-        '</div>'
-    };
-    
-    var aboutArea = {
-        template: '<div>' +
-            '<div v-html="kss"></div>' +
-        '</div>', 
-        data: function(){return {
-            kss: '<ul>' +
-                '<li>發行單位：<span style="background-color: #BBB;"><span style="color:blue;">極</span><span style="color:#FEFE11;">光</span><span style="color:#005530;">駭</span><span style="color:red;">客</span></span></li>' +
-                '<li>程式名稱：<a style="color:blue;" href="https://line.me/R/ti/p/sCsZnuBg5V">Line chatbot 台幣匯率機器人</a></li>' +
-                '<li>建立方式：點選上方連結於國外查價後加入筆記即可建立團購</li>' +
-                '</ul>'
-        }}
-    };
+    <div class="row">
+        <div class="col-sm-6" style="padding: 6px;">
+            <div class="card">
+                <div class="card-header">Print log</div>
+                <div class="card-body">
+                    <p class="card-text">บันทึกผลลัพธ์</p>
+                    <a href="#" class="btn btn-secondary" onclick="console.log('Print log');">Print log</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6" style="padding: 6px;">
+            <div class="card">
+                <div class="card-header">Print info log</div>
+                <div class="card-body">
+                    <p class="card-text">Info บันทึกผลลัพธ์</p>
+                    <a href="#" class="btn btn-info" onclick="console.info('Print info log');">Print info log</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6" style="padding: 6px;">
+            <div class="card-header">Print warn log</div>
+            <div class="card">
+                <div class="card-body">
+                    <p class="card-text">Warn บันทึกผลลัพธ์</p>
+                    <a href="#" class="btn btn-warning" onclick="console.warn('Print warn log');">Print warn log</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6" style="padding: 6px;">
+            <div class="card">
+                <div class="card-header">Print error log</div>
+                <div class="card-body">
+                    <p class="card-text">Error บันทึกผลลัพธ์</p>
+                    <a href="#" class="btn btn-danger" onclick="console.error('Print error log');">Print error log</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-3"></div>
+        <div class="col-sm-6" style="padding: 6px;">
+            <div class="card">
+                <div class="card-header">Send TextMessage</div>
+                <div class="card-body">
+                    <p class="card-text">Bot ส่งข้อความ</p>
+                    <a href="#" class="btn btn-primary" onclick="sendTextMessage();">Send message</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3"></div>
+    </div>
+</div>
+</body>
+<script>
 
-    var mainRoute = new VueRouter({
-            routes: [
-                {path: '/', component: indexArea},
-                {path: '/about', name: 'about', component: aboutArea}
-            ]
-        });
-
-        var tpl = Vue.compile('<div id="main">' + 
-            '<router-view></router-view>' +
-            '<div id="statusBar"></div>' +
-        '</div>');
-
-        var main = new Vue({
-            router: mainRoute,
-            render: tpl.render,
-            el: '#main'
+// Initialize vConsole
+function initVConsole() {
+    window.vConsole = new window.VConsole({
+        defaultPlugins: ['system', 'network', 'element', 'storage'],
+        maxLogNumber: 1000,
+        onReady: function() {
+            console.log('vConsole is ready.');
+        },
+        onClearLog: function() {
+            console.log('on clearLog');
+        }
     });
 }
 
+window.onload = function(){
+    initVConsole();
+    liff.init({ liffId: "1567747886-Ev5mwrk4" }, () => {
+      if (liff.isLoggedIn()) {
+        runApp()
+      } else {
+        liff.login();
+      }
+    }, err => console.error(err.code, error.message));
+}
 
-function initFn(){
-    liff.$hand.initAll(function(e){
-        if(liff.$hand.profile && liff.$hand.profile.displayName){
-            initVue();
-            liff.$hand.changeHash();
-        }else{
-            //取回 profile 失敗
-            alert('失敗，無法取得 LINE 用戶名稱或未設定顯示名稱。')
+function runApp() {
+  liff.getProfile().then(profile => {
+	document.getElementById("pictureUrl").src = profile.pictureUrl;
+	document.getElementById("userId").innerHTML = '<b>UserId:</b> ' + profile.userId;
+	document.getElementById("displayName").innerHTML = '<b>DisplayName:</b> ' + profile.displayName;
+	document.getElementById("statusMessage").innerHTML = '<b>StatusMessage:</b> ' + profile.statusMessage;
+	// document.getElementById("getDecodedIDToken").innerHTML = '<b>Email:</b> ' + liff.getDecodedIDToken().email;
+  }).catch(err => console.error(err));
+}
+    
+var x = document.getElementById("demoLocation");
+
+function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(showPosition);
+  } else { 
+    x.innerHTML = "Geolocation is not supported by this browser.";
+  }
+}
+
+function showPosition(position) {
+  x.innerHTML = "Latitude: " + position.coords.latitude + "<br>Longitude: " + position.coords.longitude;
+  liff.getProfile().then(profile => {
+		const userDisplayName = profile.displayName
+		liff.sendMessages([
+			{
+				"type": "location",
+				"title": userDisplayName + " location",
+				"address": userDisplayName + "อยู่ที่นี่",
+				"latitude": position.coords.latitude,
+				"longitude": position.coords.longitude
+			}
+		])
+		.then(() => {
+			console.log('message sent');
+		})
+		.catch((err) => {
+			console.error('error', err);
+		}); })
+	.catch((err) => {
+		console.error('LIFF getProfile failed', err);
+	});
+}
+
+
+
+// Initialize LIFF
+/**
+function initLiff() {
+    console.log('going to initialize LIFF');
+    liff.init(
+        data => {
+            console.log('LIFF initialized!');
+            // Now you can call LIFF API
+            const userId = data.context.userId;
+            liff.getProfile().then(profile => {
+                const userDisplayName = profile.displayName
+                console.info('User name is', userDisplayName);
+            })
+            .catch((err) => {
+                console.error('LIFF getProfile failed', err);
+            });
+        },
+        err => {
+            console.error('LIFF initialization failed', err);
         }
-    },function(){
-        //初始化失敗
-        alert('失敗，無法初始化');
-    })
+    );
+}
+**/
+function sendTextMessage() {
+    liff.getProfile().then(profile => {
+        const userDisplayName = profile.displayName
+        liff.sendMessages([
+            {
+                type: 'text',
+                text: '私の名前は' + userDisplayName + 'です！'
+            }
+        ])
+        .then(() => {
+            console.log('message sent');
+        })
+        .catch((err) => {
+            console.error('error', err);
+        }); })
+    .catch((err) => {
+        console.error('LIFF getProfile failed', err);
+    });
 }
 </script>
-
-</head>
-<body onload="initFn()">
-    <div id="main"></div>
-    <div id="pop"></div>
-</body>
 </html>
