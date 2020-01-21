@@ -98,8 +98,26 @@ function clickME() {
 
 window.onload = function(){
     initVConsole();
-    initLiff();
+    liff.init({ liffId: "1567747886-Ev5mwrk4" }, () => {
+      if (liff.isLoggedIn()) {
+        runApp()
+      } else {
+        liff.login();
+      }
+    }, err => console.error(err.code, error.message));
 }
+
+function runApp() {
+  liff.getProfile().then(profile => {
+	document.getElementById("pictureUrl").src = profile.pictureUrl;
+	document.getElementById("userId").innerHTML = '<b>UserId:</b> ' + profile.userId;
+	document.getElementById("displayName").innerHTML = '<b>DisplayName:</b> ' + profile.displayName;
+	document.getElementById("statusMessage").innerHTML = '<b>StatusMessage:</b> ' + profile.statusMessage;
+	document.getElementById("getDecodedIDToken").innerHTML = '<b>Email:</b> ' + liff.getDecodedIDToken().email;
+  }).catch(err => console.error(err));
+}
+    
+
 
 var x = document.getElementById("demoLocation");
 
