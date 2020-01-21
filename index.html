@@ -118,11 +118,46 @@ function initializeLiff() {
 	}, err => console.error(err.code, error.message));
 }
 
+liff.init({
+	liffId: "1567747886-Ev5mwrk4" //先ほどメモしたものを入力してください。
+})
+.then(async () => {
+	if (liff.isInClient()) {
+		const accessToken = liff.getAccessToken();
+		const profile = await liff.getProfile();
+		document.getElementById('displayName').innerText = profile.displayName;
+		document.getElementById('userId').innerText = profile.userId;
+		document.getElementById('pictureUrl').src = profile.pictureUrl;
+	} else {
+		if (liff.isLoggedIn()) {
+			console.log('Logged in.');
+			const accessToken = liff.getAccessToken();
+			const profile = await liff.getProfile();
+			document.getElementById('displayName').innerText = profile.displayName;
+			document.getElementById('userId').innerText = profile.userId;
+			document.getElementById('pictureUrl').src = profile.pictureUrl;
+		} else {
+			liff.login();
+		}
+	}
+	/*
+	document.getElementById('logout').addEventListener('click', function() {
+		if (liff.isLoggedIn()) {
+			liff.logout();
+			window.location.reload();
+		}
+	});
+	*/
+})
+.catch((err) => {
+	console.log(err.code, err.message);
+});
+			
 window.onload = function(){
     initVConsole();
 }
 
-initializeLiff();
+//initializeLiff();
 
 
 function runApp() {
