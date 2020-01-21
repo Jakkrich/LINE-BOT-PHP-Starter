@@ -112,15 +112,15 @@ function initializeLiff(myLiffId) {
 		liffId: myLiffId
 	}, () => {
 		console.log('ok');
-		console.log(liff22);
+		console.log(liff);
 		console.log('ok1');
-		if (liff22.isInClient()) {
+		if (liff.isInClient()) {
 			chk_register();
 		} else {
-			if (liff22.isLoggedIn()) {
+			if (liff.isLoggedIn()) {
 				openweb();
 			} else {
-				liff22.login();
+				liff.login();
 			}
 		}
 	}, err => console.error(err.code, error.message));
