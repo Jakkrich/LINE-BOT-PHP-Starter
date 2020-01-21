@@ -102,12 +102,12 @@ function initVConsole() {
     });
 }
 
-function initializeLiff(myLiffId) {
+function initializeLiff() {
 	liff.init({
-		liffId: myLiffId
+		liffId: "1567747886-Ev5mwrk4"
 	}, () => {
 		if (liff.isInClient()) {
-			chk_register();
+			runApp()();
 		} else {
 			if (liff.isLoggedIn()) {
 				runApp()();
@@ -119,11 +119,10 @@ function initializeLiff(myLiffId) {
 }
 
 window.onload = function(){
-	initializeLiff("1567747886-Ev5mwrk4");
     initVConsole();
 }
 
-
+initializeLiff();
 
 
 function runApp() {
