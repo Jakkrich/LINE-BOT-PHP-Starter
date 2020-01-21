@@ -102,11 +102,6 @@ function initVConsole() {
     });
 }
 
-window.onload = function(){
-    initVConsole();
-}
-
-initializeLiff("1567747886-Ev5mwrk4");
 function initializeLiff(myLiffId) {
 	liff.init({
 		liffId: myLiffId
@@ -122,6 +117,14 @@ function initializeLiff(myLiffId) {
 		}
 	}, err => console.error(err.code, error.message));
 }
+
+window.onload = function(){
+	initializeLiff("1567747886-Ev5mwrk4");
+    initVConsole();
+}
+
+
+
 
 function runApp() {
   liff.getProfile().then(profile => {
