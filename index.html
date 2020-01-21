@@ -104,7 +104,26 @@ function initVConsole() {
 
 window.onload = function(){
     initVConsole();
-    
+	initializeLiff("1567747886-Ev5mwrk4");
+}
+
+function initializeLiff(myLiffId) {
+	liff.init({
+		liffId: myLiffId
+	}, () => {
+		console.log('ok');
+		console.log(liff22);
+		console.log('ok1');
+		if (liff22.isInClient()) {
+			chk_register();
+		} else {
+			if (liff22.isLoggedIn()) {
+				openweb();
+			} else {
+				liff22.login();
+			}
+		}
+	}, err => console.error(err.code, error.message));
 }
 
 function runApp() {
