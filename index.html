@@ -89,7 +89,7 @@
 <script>
 
 window.onload = function(){
-    initVConsole();
+    //initVConsole();
     liff.init({ liffId: "1567747886-Ev5mwrk4" }, () => {
       if (liff.isLoggedIn()) {
         runApp()
@@ -109,8 +109,6 @@ function runApp() {
   }).catch(err => console.error(err));
 }
     
-
-
 var x = document.getElementById("demoLocation");
 
 function getLocation() {
