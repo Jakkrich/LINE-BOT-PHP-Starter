@@ -8,8 +8,10 @@
 
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue-router@2.7.0/dist/vue-router.js"></script>
-<script type="text/javascript" src="https://d.line-scdn.net/liff/1.0/sdk.js"></script>
-<script type="text/javascript" src="https://melixyen.github.io/liff-hand/liffhand.js"></script>
+<!--<script type="text/javascript" src="https://d.line-scdn.net/liff/1.0/sdk.js"></script>-->
+<script type="text/javascript" src="https://static.line-scdn.net/liff/edge/2.1/sdk.js"></script>
+<script type="text/javascript" src="https://melixyen.github.io/liff-hand/liffhand2.js"></script>
+<script type="text/javascript" src="liffhand2.js"></script>
 
 <script type="text/javascript">
 Vue.config.productionTip = false;
@@ -68,7 +70,10 @@ function initFn(){
     },function(){
         //初始化失敗
         alert('失敗，無法初始化');
-    })
+    },
+    {liffId:'1583085463-p9lKk7BR'},
+    {autoLogin: true}
+    )
 }
 </script>
 
