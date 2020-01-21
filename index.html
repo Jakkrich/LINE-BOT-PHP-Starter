@@ -88,8 +88,22 @@
 </body>
 <script>
 
+// Initialize vConsole
+function initVConsole() {
+    window.vConsole = new window.VConsole({
+        defaultPlugins: ['system', 'network', 'element', 'storage'],
+        maxLogNumber: 1000,
+        onReady: function() {
+            console.log('vConsole is ready.');
+        },
+        onClearLog: function() {
+            console.log('on clearLog');
+        }
+    });
+}
+
 window.onload = function(){
-    //initVConsole();
+    initVConsole();
     liff.init({ liffId: "1567747886-Ev5mwrk4" }, () => {
       if (liff.isLoggedIn()) {
         runApp()
@@ -143,19 +157,7 @@ function showPosition(position) {
 	});
 }
 
-// Initialize vConsole
-function initVConsole() {
-    window.vConsole = new window.VConsole({
-        defaultPlugins: ['system', 'network', 'element', 'storage'],
-        maxLogNumber: 1000,
-        onReady: function() {
-            console.log('vConsole is ready.');
-        },
-        onClearLog: function() {
-            console.log('on clearLog');
-        }
-    });
-}
+
 
 // Initialize LIFF
 /**
