@@ -14,9 +14,12 @@
 <body>
 <div class="container">
 
-	<button type="button" onClick="clickME()">Click me 10 Hit</button>
-    <p>Clicks: <a id="clicks">0</a></p>
-
+	<img id="pictureUrl" width="25%">
+	<p id="userId"></p>
+	<p id="displayName"></p>
+	<p id="statusMessage"></p>
+	<p id="getDecodedIDToken"></p>
+  
 	<div class="row">
         <div class="col-sm-12" style="padding: 6px;">
             <div class="card">
@@ -85,16 +88,6 @@
 </div>
 </body>
 <script>
-
-var clicks = 0;
-function clickME() {
-	clicks += 1;
-	document.getElementById("clicks").innerHTML = clicks;
-	//if(clicks == 10){
-		//initVConsole();
-		//initLiff();
-	//}
-}
 
 window.onload = function(){
     initVConsole();
@@ -168,6 +161,7 @@ function initVConsole() {
 }
 
 // Initialize LIFF
+/**
 function initLiff() {
     console.log('going to initialize LIFF');
     liff.init(
@@ -188,7 +182,7 @@ function initLiff() {
         }
     );
 }
-
+**/
 function sendTextMessage() {
     liff.getProfile().then(profile => {
         const userDisplayName = profile.displayName
